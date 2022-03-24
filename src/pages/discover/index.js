@@ -1,71 +1,74 @@
-import React from "react";
-import styled from 'styled-components';
+import React from 'react'
+import axios from 'axios'
+import styled from 'styled-components'
 
-import * as colors from "../../colors";
-import * as fetcher from "../../fetcher";
+import * as colors from '../../colors'
+import { fetchMovies } from '../../fetcher'
 
-import SearchFilters from "../../components/searchfilter";
-import MovieList from "../../components/movielist";
+import SearchFilters from '../../components/searchfilter'
+import MovieList from '../../components/movielist'
 
-export default class Discover extends React.Component {
-  constructor (props) {
-    super(props);
+import { useState, useEffect, createContext, useContext } from 'react'
 
-    this.state = {
-      keyword: '',
-      year: 0,
-      results: [],
-      totalCount: 0,
-      genreOptions: [],
-      ratingOptions: [
-        { id: 7.5, name: 7.5 },
-        { id: 8, name: 8 },
-        { id: 8.5, name: 8.5 },
-        { id: 9, name: 9 },
-        { id: 9.5, name: 9.5 },
-        { id: 10, name: 10 }
-      ],
-      languageOptions: [
-        { id: 'GR', name: 'Greek' },
-        { id: 'EN', name: 'English' },
-        { id: 'RU', name: 'Russian' },
-        { id: 'PO', name: 'Polish' }
-      ]
-    };
-  }
+const DEFAULT_SEARCH_FILTERS = {
+  keyword: '',
+  year: '',
+  totalCount: 0,
+  genreOptions: [],
+  ratingOptions: [
+    { id: 7.5, name: 7.5 },
+    { id: 8, name: 8 },
+    { id: 8.5, name: 8.5 },
+    { id: 9, name: 9 },
+    { id: 9.5, name: 9.5 },
+    { id: 10, name: 10 },
+  ],
+  languageOptions: [
+    { id: 'GR', name: 'Greek' },
+    { id: 'EN', name: 'English' },
+    { id: 'RU', name: 'Russian' },
+    { id: 'PO', name: 'Polish' },
+  ],
+}
 
-  // TODO: Preload and set the popular movies and movie genres when page loads
-  componentDidMount() {
-    fetcher.fetchMovies().then(results => {
-      this.setState({...this.state, results})
+const SearchContext = createContext({
+  filters: {},
+  updateFilters: (name, value) => {},
+})
+
+export function useSearchContext() {
+  return useContext(SearchContext)
+}
+
+export default function Discover() {
+  const [results, updateResults] = useState([])
+  const [filters, updateFilters] = useState(DEFAULT_SEARCH_FILTERS)
+  useEffect(() => {
+    console.log(filters.year)
+    // DONE: Preload and set the popular movies and movie genres when page loads
+    fetchMovies().then((results) => {
+      updateResults(results)
     })
-  }
-  // TODO: Update search results based on the keyword and year inputs
+  }, [filters])
 
-  render () {
-    const { genreOptions, languageOptions, ratingOptions, totalCount, results } = this.state;
-
-    return (
+  return (
+    <SearchContext.Provider value={{ filters, updateFilters }}>
       <DiscoverWrapper>
-        <MobilePageTitle>Discover</MobilePageTitle> {/* MobilePageTitle should become visible on mobile devices via CSS media queries*/}
-        <TotalCount>{totalCount} results</TotalCount>
+        <MobilePageTitle>Discover</MobilePageTitle>{' '}
+        {/* MobilePageTitle should become visible on mobile devices via CSS media queries*/}
+        <TotalCount>{filters.totalCount} results</TotalCount>
         <MovieFilters>
-          <SearchFilters 
-            genres={genreOptions} 
-            ratings={ratingOptions}  
-            languages={languageOptions}
-            searchMovies={(keyword, year) => this.searchMovies(keyword, year)}
-          />
+          <SearchFilters />
         </MovieFilters>
         <MovieResults>
-          <MovieList 
+          <MovieList
             movies={results || []}
-            genres={genreOptions || []}
+            genres={filters.genreOptions || []}
           />
         </MovieResults>
       </DiscoverWrapper>
-    )
-  }
+    </SearchContext.Provider>
+  )
 }
 
 const DiscoverWrapper = styled.main`
