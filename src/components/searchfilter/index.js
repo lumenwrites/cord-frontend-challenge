@@ -44,6 +44,7 @@ export default function SearchFilters({
       </SearchFiltersCont>
       <SearchFiltersCont>
         <CategoryTitle>Movies</CategoryTitle>
+        <ExpandableFilter genres={filters.genreOptions} />
         {/* TODO: Complete the "AccordionFilter" component and re-use it for all filter categories */}
       </SearchFiltersCont>
     </FiltersWrapper>

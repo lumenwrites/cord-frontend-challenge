@@ -22,3 +22,12 @@ export async function fetchMovies(filters) {
   })
   return data.results
 }
+
+export async function fetchGenres() {
+  const { data } = await axios.get(`${API_URL}/genre/movie/list`, {
+    params: {
+      api_key: process.env.REACT_APP_API_KEY
+    },
+  })
+  return data.genres
+}

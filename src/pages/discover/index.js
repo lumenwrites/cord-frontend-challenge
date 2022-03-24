@@ -3,7 +3,7 @@ import axios from 'axios'
 import styled from 'styled-components'
 
 import * as colors from '../../colors'
-import { fetchMovies } from '../../fetcher'
+import { fetchGenres, fetchMovies } from '../../fetcher'
 
 import SearchFilters from '../../components/searchfilter'
 import MovieList from '../../components/movielist'
@@ -44,7 +44,11 @@ export default function Discover() {
   const [results, updateResults] = useState([])
   const [filters, updateFilters] = useState(DEFAULT_SEARCH_FILTERS)
   useEffect(() => {
-    // DONE: Preload and set the popular movies and movie genres when page loads
+    fetchGenres().then((results) => {
+      updateFilters(prev => ({...prev, genreOptions: results}))
+    })
+  }, [])
+  useEffect(() => {
     fetchMovies(filters).then((results) => {
       updateResults(results)
     })
