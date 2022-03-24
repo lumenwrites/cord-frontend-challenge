@@ -35,7 +35,11 @@ export default class Discover extends React.Component {
   }
 
   // TODO: Preload and set the popular movies and movie genres when page loads
-
+  componentDidMount() {
+    fetcher.fetchMovies().then(results => {
+      this.setState({...this.state, results})
+    })
+  }
   // TODO: Update search results based on the keyword and year inputs
 
   render () {

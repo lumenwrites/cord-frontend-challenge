@@ -1,4 +1,13 @@
-import axios from 'axios';
+import axios from 'axios'
 
-// TODO: All of your API requests should be in this file
-// See the README file for more information about the APIs you would need to use
+const API_URL = 'https://api.themoviedb.org/3'
+
+export async function fetchMovies() {
+  const { data } = await axios.get(`${API_URL}/movie/popular`, {
+    params: {
+      api_key: process.env.REACT_APP_API_KEY,
+    },
+  })
+  console.log('data.results', data)
+  return data.results
+}
