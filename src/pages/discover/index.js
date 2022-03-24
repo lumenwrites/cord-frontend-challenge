@@ -44,9 +44,8 @@ export default function Discover() {
   const [results, updateResults] = useState([])
   const [filters, updateFilters] = useState(DEFAULT_SEARCH_FILTERS)
   useEffect(() => {
-    console.log(filters.year)
     // DONE: Preload and set the popular movies and movie genres when page loads
-    fetchMovies().then((results) => {
+    fetchMovies(filters).then((results) => {
       updateResults(results)
     })
   }, [filters])
