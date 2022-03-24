@@ -43,11 +43,13 @@ export function useSearchContext() {
 export default function Discover() {
   const [results, updateResults] = useState([])
   const [filters, updateFilters] = useState(DEFAULT_SEARCH_FILTERS)
+  // Fetch genres on the first load
   useEffect(() => {
     fetchGenres().then((results) => {
       updateFilters(prev => ({...prev, genreOptions: results}))
     })
   }, [])
+  // Fetch movies
   useEffect(() => {
     fetchMovies(filters).then((results) => {
       updateResults(results)
