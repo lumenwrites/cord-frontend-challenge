@@ -2,15 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import * as colors from '../../colors'
 
-function GenresLabels(genreIds, allGenres) {
-  const movieGenres = allGenres.filter((genre) => genreIds?.includes(genre.id))
-  const genreNames = movieGenres.map((genre) => genre.name)
-  return genreNames.join(' | ')
-}
-
 export default function MovieItem({ movie, genres }) {
-  console.log('movie', movie)
-  console.log(genres[0])
   return (
     <MovieItemWrapper>
       <LeftCont>
@@ -18,13 +10,19 @@ export default function MovieItem({ movie, genres }) {
       </LeftCont>
       <RightCont>
         <Title>{movie.title}</Title>
-        <Genres>{GenresLabels(movie.genre_ids, genres)}</Genres>
+        <Genres>{GenreLabels(movie.genre_ids, genres)}</Genres>
         <Description>{movie.overview}</Description>
         <ReleaseDate>{movie.release_date}</ReleaseDate>
         <Rating>{movie.vote_average}</Rating>
       </RightCont>
     </MovieItemWrapper>
   )
+}
+
+function GenreLabels(genreIds, allGenres) {
+  const movieGenres = allGenres.filter((genre) => genreIds?.includes(genre.id))
+  const genreNames = movieGenres.map((genre) => genre.name)
+  return genreNames.join(' | ')
 }
 
 const MovieItemWrapper = styled.div`

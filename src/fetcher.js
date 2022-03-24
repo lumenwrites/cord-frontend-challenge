@@ -10,7 +10,7 @@ export async function fetchMovies(filters) {
         api_key: process.env.REACT_APP_API_KEY,
       },
     })
-    return data.results
+    return { results: data.results, totalCount: data.total_results }
   }
   // Searching by keyword or by year
   const { data } = await axios.get(`${API_URL}/search/movie`, {
@@ -20,13 +20,13 @@ export async function fetchMovies(filters) {
       year: filters.year,
     },
   })
-  return data.results
+  return { results: data.results, totalCount: data.total_results }
 }
 
 export async function fetchGenres() {
   const { data } = await axios.get(`${API_URL}/genre/movie/list`, {
     params: {
-      api_key: process.env.REACT_APP_API_KEY
+      api_key: process.env.REACT_APP_API_KEY,
     },
   })
   return data.genres

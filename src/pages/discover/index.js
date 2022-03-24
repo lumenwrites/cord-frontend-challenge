@@ -13,7 +13,6 @@ import { useState, useEffect, createContext, useContext } from 'react'
 const DEFAULT_SEARCH_FILTERS = {
   keyword: '',
   year: '',
-  totalCount: 0,
   genreOptions: [],
   ratingOptions: [
     { id: 7.5, name: 7.5 },
@@ -41,18 +40,18 @@ export function useSearchContext() {
 }
 
 export default function Discover() {
-  const [results, updateResults] = useState([])
+  const [results, updateResults] = useState({ results: [], totalCount: 0 })
   const [filters, updateFilters] = useState(DEFAULT_SEARCH_FILTERS)
   // Fetch genres on the first load
   useEffect(() => {
     fetchGenres().then((results) => {
-      updateFilters(prev => ({...prev, genreOptions: results}))
+      updateFilters((prev) => ({ ...prev, genreOptions: results }))
     })
   }, [])
   // Fetch movies
   useEffect(() => {
-    fetchMovies(filters).then((results) => {
-      updateResults(results)
+    fetchMovies(filters).then(({ results, totalCount }) => {
+      updateResults({ results, totalCount })
     })
   }, [filters])
 
@@ -61,13 +60,13 @@ export default function Discover() {
       <DiscoverWrapper>
         <MobilePageTitle>Discover</MobilePageTitle>{' '}
         {/* MobilePageTitle should become visible on mobile devices via CSS media queries*/}
-        <TotalCount>{filters.totalCount} results</TotalCount>
+        <TotalCount>{results.totalCount} results</TotalCount>
         <MovieFilters>
           <SearchFilters />
         </MovieFilters>
         <MovieResults>
           <MovieList
-            movies={results || []}
+            movies={results.results || []}
             genres={filters.genreOptions || []}
           />
         </MovieResults>
