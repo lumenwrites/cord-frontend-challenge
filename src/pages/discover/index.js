@@ -58,8 +58,7 @@ export default function Discover() {
   return (
     <SearchContext.Provider value={{ filters, updateFilters }}>
       <DiscoverWrapper>
-        <MobilePageTitle>Discover</MobilePageTitle>{' '}
-        {/* MobilePageTitle should become visible on mobile devices via CSS media queries*/}
+        <MobilePageTitle>Discover</MobilePageTitle>
         <TotalCount>{results.totalCount} results</TotalCount>
         <MovieFilters>
           <SearchFilters />
@@ -82,16 +81,26 @@ const DiscoverWrapper = styled.main`
 const MovieResults = styled.div`
   display: inline-block;
   width: calc(100% - 295px);
+  @media (max-width: 820px) {
+    width: 100%;
+  }
 `
 
 const MovieFilters = styled.div`
   width: 280px;
   float: right;
   margin-top: 15px;
+  @media (max-width: 820px) {
+    display: none;
+  }
 `
 
 const MobilePageTitle = styled.h1`
+  margin-left: 30px;
   display: none;
+  @media (max-width: 1024px) {
+    display: block;
+  }
 `
 
 const TotalCount = styled.strong`

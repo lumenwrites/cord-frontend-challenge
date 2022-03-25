@@ -11,9 +11,9 @@ export default function MovieItem({ movie, genres }) {
       <RightCont>
         <Title>{movie.title}</Title>
         <Genres>{GenreLabels(movie.genre_ids, genres)}</Genres>
+        <Rating>{movie.vote_average}</Rating>
         <Description>{movie.overview}</Description>
         <ReleaseDate>{movie.release_date}</ReleaseDate>
-        <Rating>{movie.vote_average}</Rating>
       </RightCont>
     </MovieItemWrapper>
   )
@@ -36,12 +36,21 @@ const MovieItemWrapper = styled.div`
 
 const LeftCont = styled.div`
   margin-right: 20px;
-  max-width: 150px;
+  flex: 0 0 150px;
+  img {
+    max-width: 100%;
+  }
+  @media (max-width: 540px) {
+    flex: 0 0 100px;
+  }
 `
 
 const RightCont = styled.div`
   h2 {
     margin: 0;
+  }
+  @media (max-width: 540px) {
+    font-size: 0.8em;
   }
 `
 
@@ -57,6 +66,10 @@ const ReleaseDate = styled.span`
   color: ${colors.primaryColor};
   position: absolute;
   bottom: 20px;
+  font-weight: 100;
+  @media (max-width: 540px) {
+    position: static;
+  }
 `
 const Rating = styled.div`
   background: ${colors.primaryColor};
