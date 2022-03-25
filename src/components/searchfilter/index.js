@@ -2,7 +2,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 import * as colors from '../../colors'
-import ExpandableFilter from '../accordionfilter'
+import AccordionFilter from '../accordionfilter'
 import SearchBar from '../../components/searchbar'
 
 import SearchIcon from '../../images/search-icon-yellow.png'
@@ -10,12 +10,7 @@ import YearIcon from '../../images/year-icon.png'
 
 import { useSearchContext } from '../../pages/discover'
 
-export default function SearchFilters({
-  genres,
-  ratings,
-  languages,
-  onSearch,
-}) {
+export default function SearchFilters() {
   const { filters, updateFilters } = useSearchContext()
 
   return (
@@ -43,9 +38,18 @@ export default function SearchFilters({
         />
       </SearchFiltersCont>
       <SearchFiltersCont>
-        <CategoryTitle>Movies</CategoryTitle>
-        <ExpandableFilter genres={filters.genreOptions} />
-        {/* TODO: Complete the "AccordionFilter" component and re-use it for all filter categories */}
+        <AccordionFilter
+          items={filters.genreOptions}
+          title="Select genre(s)"
+        />
+        <AccordionFilter
+          items={filters.ratingOptions}
+          title="Select min. vote"
+        />
+        <AccordionFilter
+          items={filters.languageOptions}
+          title="Select language"
+        />
       </SearchFiltersCont>
     </FiltersWrapper>
   )
@@ -70,8 +74,4 @@ const SearchFiltersCont = styled.div`
     css`
       margin-bottom: 15px;
     `}
-`
-
-const CategoryTitle = styled.h3`
-  margin: 0 0 15px 0;
 `
