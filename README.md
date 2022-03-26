@@ -18,12 +18,6 @@ Screenshots - desktop version, mobile version, and mobile with opened sidebar:
 - The website is responsive. 
 - On mobile devices the sidebar is hidden, and sildes out when user clicks on the hamburger icon.
 
-## APIs
-Movie data is queried via [theMovieDB]:
-- Popular movies API doc: [popularMovies]
-- Movie Genres API doc: [movieGenres]
-- Search movies API doc: [searchMovies]
-
 ## Installation instruction
 Clone the repo, install the packages:
 ```

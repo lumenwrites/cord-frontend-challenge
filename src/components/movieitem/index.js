@@ -6,7 +6,7 @@ export default function MovieItem({ movie, genres }) {
   return (
     <MovieItemWrapper>
       <LeftCont>
-        <img src={`https://image.tmdb.org/t/p/w154/${movie.poster_path}`} />
+        <img src={`https://image.tmdb.org/t/p/w154/${movie.poster_path}`} alt="Movie poster" />
       </LeftCont>
       <RightCont>
         <Title>{movie.title}</Title>

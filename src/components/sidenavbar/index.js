@@ -16,7 +16,7 @@ export default function SideNavBar() {
         className={isOpen ? 'hidden' : ''}
         onClick={() => setIsOpen((prev) => !prev)}
       >
-        <img src={BarsIcon} />
+        <img src={BarsIcon} alt="Open sidebar" />
       </HamburgerMenu>
       <DarkBG
         className={isOpen ? 'visible' : ''}
