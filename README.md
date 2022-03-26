@@ -17,6 +17,7 @@ Screenshots - desktop version, mobile version, and mobile with opened sidebar:
 - Filter categories can be expanded and collapsed when user clicks on them.
 - The website is responsive. 
 - On mobile devices the sidebar is hidden, and sildes out when user clicks on the hamburger icon.
+- Images have `alt` attributes for accessibility.
 
 ## Installation instruction
 Clone the repo, install the packages:
