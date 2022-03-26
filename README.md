@@ -6,6 +6,9 @@ See the deployed version of the app here:
 
 https://cord-frontend-challenge.vercel.app/discover
 
+Screenshots - desktop version, mobile version, and mobile with opened sidebar:
+![](https://github.com/lumenwrites/cord-frontend-challenge/blob/main/assets/completed-app.png)
+
 ## Implemented functionality:
 
 - Users can search for movies by keywords and year of release.
