@@ -9,7 +9,7 @@ import BarsIcon from '../../images/bars.svg'
 
 export default function SideNavBar() {
   const [isOpen, setIsOpen] = useState(false)
-  /* TODO: Write the necessary functions to open and close the sidebar */
+
   return (
     <>
       <HamburgerMenu
@@ -18,15 +18,11 @@ export default function SideNavBar() {
       >
         <img src={BarsIcon} />
       </HamburgerMenu>
-      {/* <MobilePageTitle>Discover</MobilePageTitle> */}
       <DarkBG
         className={isOpen ? 'visible' : ''}
         onClick={() => setIsOpen((prev) => !prev)}
       />
       <SideNavBarCont className={isOpen ? 'visible' : ''}>
-        {/* TODO: Implement a hamburger icon that controls the open state of the sidebar. 
-      This control should only be visible on mobile devices via CSS media queries */}
-        {/* The sidebar should slide in from left */}
         <SideNavHeader>
           Wesley
           <img src={Arrow} alt="Arrow pointing down" />

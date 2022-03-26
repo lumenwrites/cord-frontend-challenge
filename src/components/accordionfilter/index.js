@@ -3,10 +3,9 @@ import styled from 'styled-components'
 import { useSearchContext } from '../../pages/discover'
 import { useState } from 'react'
 
-import * as colors from '../../colors'
-
 import PlusIcon from '../../images/plus.svg'
 import MinusIcon from '../../images/minus.svg'
+import Checkbox from '../checkbox'
 
 export default function AccordionFilter({ items, title }) {
   const [expanded, setExpanded] = useState(false)
@@ -24,18 +23,15 @@ export default function AccordionFilter({ items, title }) {
       </CategoryTitle>
       <Items className={expanded ? 'expanded' : ''}>
         {items.map((item) => (
-          <Item
+          <Checkbox
             key={item.id}
+            checked={checkedItemsIds.includes(item.id)}
+            name={item.name}
+            label={item.name}
             onClick={() =>
               toggelCheckbox(item.id, checkedItemsIds, setCheckedItemsIds)
             }
-          >
-            <input
-              type="checkbox"
-              checked={checkedItemsIds.includes(item.id)}
-            />
-            {item.name}
-          </Item>
+          />
         ))}
       </Items>
     </div>
@@ -67,11 +63,11 @@ const Items = styled.div`
   }
 `
 
-const Item = styled.div`
-  font-weight: 100;
-  color: ${colors.fontColor};
-  cursor:pointer;
-`
+// const Item = styled.div`
+//   font-weight: 100;
+//   color: ${colors.fontColor};
+//   cursor:pointer;
+// `
 const Icon = styled.img`
   width: 15px;
   height: 15px;
