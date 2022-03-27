@@ -9,7 +9,7 @@ https://cord-frontend-challenge.vercel.app/discover
 Screenshots - desktop version, mobile version, and mobile with opened sidebar:
 ![](https://github.com/lumenwrites/cord-frontend-challenge/blob/main/assets/completed-app.png)
 
-## Implemented functionality:
+## Implemented functionality
 
 - Users can search for movies by keywords and year of release.
 - Search results update in real time as the user types into searchboxes.
@@ -17,10 +17,15 @@ Screenshots - desktop version, mobile version, and mobile with opened sidebar:
 - Filter categories can be expanded and collapsed when user clicks on them.
 - The website is responsive. 
 - On mobile devices the sidebar is hidden, and sildes out when user clicks on the hamburger icon.
-- Images have `alt` attributes for accessibility.
-- Route-based code splitting
 
-## Installation instruction
+## Notes
+- Images have `alt` attributes for accessibility.
+- I've implemented route-based code splitting.
+- Using React Hooks and functional components instead of the class based components.
+- React profiler has not revealed any issues.
+
+
+## Installation instructions
 Clone the repo, install the packages:
 ```
 npm i
